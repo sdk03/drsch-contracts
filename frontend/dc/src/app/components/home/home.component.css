@@ -1,0 +1,31 @@
+.search{
+    width: 100%;
+}
+
+.table-grid{
+    display: grid;
+    grid-template-columns: 75% 23%;
+    column-gap: 2em;
+   
+}
+
+.table-container{
+    height: 88vh;
+    overflow: auto;
+
+}
+
+.data-table{
+    width: 100%;
+}
+
+.main{
+    padding: .5em;
+    margin-right: .5em;
+    margin-left: .5em;
+    margin-top: .5em;
+
+    border: 1px solid red;
+    border-radius: 16px;
+    background-color: #D5D5D3;
+}
