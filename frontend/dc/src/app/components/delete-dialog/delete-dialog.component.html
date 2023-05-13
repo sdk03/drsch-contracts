@@ -1,0 +1,20 @@
+<div class="main">
+    <h2>Delete Contract?</h2>
+    <mat-divider></mat-divider>
+    
+    <div class="list">
+        <ul>
+            <li>ID: {{data.d_id}}</li>
+            <li>Contract: {{data.project_id}}</li>
+        </ul>
+    </div>
+
+    <mat-divider></mat-divider>
+    <br>
+    <div style="text-align: right;">
+        <button mat-raised-button color="primary" (click)="onNoClick()">Cancel</button>
+        &nbsp;
+        <button mat-raised-button color="warn" (click)="deleteConfirm(data.d_id,data.project_id)">Delete</button>
+    </div>
+
+</div>

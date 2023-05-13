@@ -1,145 +1,400 @@
 <div class="main">
-  
-<mat-form-field class="search">
-  <mat-label>Search Table</mat-label>
-  <input matInput placeholder="" (keyup)="searchData($event)">
-</mat-form-field>
 
-<div class="table-grid">
-  <div class="table-container">
-    <table mat-table [dataSource]="dataSource" class="data-table">
+  <mat-tab-group [(selectedIndex)]="tabIndex" headerPosition="below">
+    <mat-tab label="VIEW" class="tab-grp">
 
-      <!--- Note that these columns can be defined in any order.
-            The actual rendered columns are set as a property on the row definition" -->
-    
-      <!-- Column -->
-      <ng-container matColumnDef="1">
-        <th mat-header-cell *matHeaderCellDef> SN </th>
-        <td mat-cell *matCellDef="let element"> {{element.db_id}} </td>
-      </ng-container>
-  
-      <!-- Column -->
-      <ng-container matColumnDef="2">
-        <th mat-header-cell *matHeaderCellDef> ID </th>
-        <td mat-cell *matCellDef="let element" (click)="openRemarks(element.db_id)" class="link"> {{element.project_id}} </td>
-      </ng-container>
-  
-      <!-- Column -->
-      <ng-container matColumnDef="3">
-        <th mat-header-cell *matHeaderCellDef> Project </th>
-        <td mat-cell *matCellDef="let element"> {{element.project_name}} </td>
-      </ng-container>
-  
-      <!-- Column -->
-      <ng-container matColumnDef="4">
-        <th mat-header-cell *matHeaderCellDef> 1st Party </th>
-        <td mat-cell *matCellDef="let element"> {{element.first_party}} </td>
-      </ng-container>
-  
-      <!-- Column -->
-      <ng-container matColumnDef="5">
-        <th mat-header-cell *matHeaderCellDef> 2nd Party </th>
-        <td mat-cell *matCellDef="let element"> {{element.second_party}} </td>
-      </ng-container>
-  
-      <!-- Column -->
-      <ng-container matColumnDef="6">
-        <th mat-header-cell *matHeaderCellDef> Location </th>
-        <td mat-cell *matCellDef="let element"> {{element.project_location}} </td>
-      </ng-container>
-  
-      <!-- Column -->
-      <ng-container matColumnDef="7">
-        <th mat-header-cell *matHeaderCellDef> Template </th>
-        <td mat-cell *matCellDef="let element"> {{element.template}} </td>
-      </ng-container>
-  
-      <!-- Column -->
-      <ng-container matColumnDef="8">
-        <th mat-header-cell *matHeaderCellDef> Type </th>
-        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
-      </ng-container>
-  
-      <!-- Column -->
-      <ng-container matColumnDef="9">
-        <th mat-header-cell *matHeaderCellDef> Scope </th>
-        <td mat-cell *matCellDef="let element"> {{element.scope}} </td>
-      </ng-container>
-  
-      <!-- Column -->
-      <ng-container matColumnDef="10">
-        <th mat-header-cell *matHeaderCellDef> ARN </th>
-        <td mat-cell *matCellDef="let element"> {{element.arn}} </td>
-      </ng-container>
-  
-      <!-- Column -->
-      <ng-container matColumnDef="11">
-        <th mat-header-cell *matHeaderCellDef> Agreement </th>
-        <td mat-cell *matCellDef="let element"> {{element.agreement}} </td>
-      </ng-container>
-  
-      <!-- Column -->
-      <ng-container matColumnDef="12">
-        <th mat-header-cell *matHeaderCellDef> Contact </th>
-        <td mat-cell *matCellDef="let element"> {{element.contact}} </td>
-      </ng-container>
-  
-      <!-- Column -->
-      <ng-container matColumnDef="13">
-        <th mat-header-cell *matHeaderCellDef> EXT. </th>
-        <td mat-cell *matCellDef="let element"> {{element.contact_ext}} </td>
-      </ng-container>
-  
-      <!-- Column -->
-      <ng-container matColumnDef="14">
-        <th mat-header-cell *matHeaderCellDef> Director </th>
-        <td mat-cell *matCellDef="let element"> {{element.director}} </td>
-      </ng-container>
-  
+      <br>
       
-    
-      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>
-  </div>
+      <div class="table-grid">
 
-  <div class="remarks-container">
-    
-    <mat-card class="card">
-      <h3>Remarks</h3>
-    <mat-divider></mat-divider>
-    <br>
-    <ng-container *ngIf="filterContractRemarks.length == 0">
-      No Data Found
-    </ng-container>
+        <div>
+          <mat-card class="card-rt grid2">
+            <div>
+              <mat-form-field class="search">
+                <mat-label>Search Table</mat-label>
+                <input matInput placeholder="" (keyup)="searchData($event)">
+              </mat-form-field>
+            </div>
+           <div></div>
+          </mat-card>
+        </div>
+        
+        <div class="tools">
+          <mat-card class="card-rt logo">
+            <div class="heading">
+              <div style="text-align: center;">
+                
+                <button mat-fab  style="background-color: #1C6C41;" aria-label="" matTooltip="Export Excel" (click)="exportPDF()">
+                  <mat-icon>table_view</mat-icon>
+                </button>
+                &nbsp;
+                <button mat-fab  style="background-color: #AB0D01;" aria-label="" matTooltip="Export PDF" (click)="exportPDF()">
+                  <mat-icon>picture_as_pdf</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-card>
+        </div>
 
-    <mat-accordion>
+        <div class="table-container">
 
-      <ng-container *ngFor="let i of filterContractRemarks">
+          <mat-card class="card">
 
-        <mat-expansion-panel >
-          <mat-expansion-panel-header>
-  
-            <mat-panel-title>
-              {{i.remarks_header}}
-            </mat-panel-title>
-  
-            <!-- <mat-panel-description>
-              Remarks Desc
-            </mat-panel-description> -->
-  
-          </mat-expansion-panel-header>
-          <p> {{i.remarks}}</p>
-        </mat-expansion-panel>
-
-      </ng-container>
+          <div id="dtDiv" #dtDiv>
+            <table mat-table [dataSource]="dataSource" class="data-table" id="data-table">
       
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+            
+              <!-- Column -->
+              <ng-container matColumnDef="1">
+                <th mat-header-cell *matHeaderCellDef> SN </th>
+                <td mat-cell *matCellDef="let element; let i = index;" matTooltip="DB-ID: {{element.db_id}}"> {{i+1}} </td>
+              </ng-container>
+          
+              <!-- Column -->
+              <ng-container matColumnDef="2">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let element" (click)="openRemarks(element.db_id,element.project_id)" class="link"> {{element.project_id}} </td>
+              </ng-container>
+          
+              <!-- Column -->
+              <ng-container matColumnDef="3">
+                <th mat-header-cell *matHeaderCellDef> Project </th>
+                <td mat-cell *matCellDef="let element"> {{element.project_name}} </td>
+              </ng-container>
+          
+              <!-- Column -->
+              <ng-container matColumnDef="4">
+                <th mat-header-cell *matHeaderCellDef> 1st Party </th>
+                <td mat-cell *matCellDef="let element"> {{element.first_party}} </td>
+              </ng-container>
+          
+              <!-- Column -->
+              <ng-container matColumnDef="5">
+                <th mat-header-cell *matHeaderCellDef> 2nd Party </th>
+                <td mat-cell *matCellDef="let element"> {{element.second_party}} </td>
+              </ng-container>
+          
+              <!-- Column -->
+              <ng-container matColumnDef="6">
+                <th mat-header-cell *matHeaderCellDef> Location </th>
+                <td mat-cell *matCellDef="let element"> {{element.project_location}} </td>
+              </ng-container>
+          
+              <!-- Column -->
+              <ng-container matColumnDef="7">
+                <th mat-header-cell *matHeaderCellDef> Template </th>
+                <td mat-cell *matCellDef="let element"> {{element.template}} </td>
+              </ng-container>
+          
+              <!-- Column -->
+              <ng-container matColumnDef="8">
+                <th mat-header-cell *matHeaderCellDef> Type </th>
+                <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+              </ng-container>
+          
+              <!-- Column -->
+              <ng-container matColumnDef="9">
+                <th mat-header-cell *matHeaderCellDef> Scope </th>
+                <td mat-cell *matCellDef="let element"> {{element.scope}} </td>
+              </ng-container>
+          
+              <!-- Column -->
+              <ng-container matColumnDef="10">
+                <th mat-header-cell *matHeaderCellDef> ARN </th>
+                <td mat-cell *matCellDef="let element"  [ngClass]="{'approved':element.arn == 'A','com':element.arn == 'COM','no-work':element.arn == 'NW','tech-dept':element.arn == 'TD' }">  {{element.arn}} </td>
+              </ng-container>
+          
+              <!-- Column -->
+              <ng-container matColumnDef="11">
+                <th mat-header-cell *matHeaderCellDef> AGMT </th>
+                <td mat-cell *matCellDef="let element" [ngClass]="{'approved':element.agreement == 'A','com':element.agreement == 'COM','no-work':element.agreement == 'NW','tech-dept':element.agreement == 'TD' }"> {{element.agreement}} </td>
+              </ng-container>
+          
+              <!-- Column -->
+              <ng-container matColumnDef="12">
+                <th mat-header-cell *matHeaderCellDef> Contact </th>
+                <td mat-cell *matCellDef="let element"> {{element.contact}} </td>
+              </ng-container>
+          
+              <!-- Column -->
+              <ng-container matColumnDef="13">
+                <th mat-header-cell *matHeaderCellDef> EXT. </th>
+                <td mat-cell *matCellDef="let element"> {{element.contact_ext}} </td>
+              </ng-container>
+          
+              <!-- Column -->
+              <ng-container matColumnDef="14">
+                <th mat-header-cell *matHeaderCellDef> Director </th>
+                <td mat-cell *matCellDef="let element"> {{element.director}} </td>
+              </ng-container>
 
-    </mat-accordion>
-    </mat-card>
+               <!-- Column -->
+               <ng-container matColumnDef="Delete">
+                <th mat-header-cell *matHeaderCellDef> Delete </th>
+                <td mat-cell *matCellDef="let element"> 
+                  <p class="link" (click)="deleteRecord('Contract',element.db_id,element.project_id)"><mat-icon>delete</mat-icon></p>
+                 </td>
+              </ng-container>
+
+               <!-- Column -->
+               <ng-container matColumnDef="Edit">
+                <th mat-header-cell *matHeaderCellDef width="1%"> Edit </th>
+                <td mat-cell *matCellDef="let element"> 
+                  <p class="link" (click)="editContractOpen(element.db_id)"><mat-icon>edit_note</mat-icon></p>
+                 </td>
+              </ng-container>
+          
+              
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+          </div>
+
+          </mat-card>
+
+        </div>
+      
+        <div class="remarks-container">
+          
+          <mat-card class="card">
+            <h3>Remarks - Contract [{{currentContractID}}] DB[{{currentContractSn}}]</h3>
+          <mat-divider></mat-divider>
+          <br>
+          <ng-container *ngIf="addRemarkButton !== false">
+            <button mat-raised-button color="primary" (click)="addRemarkDialog(currentContractSn,currentContractID)">Add Remarks</button>
+            <br>
+          </ng-container>
+
+          <ng-container *ngIf="filterContractRemarks.length == 0">
+            No Data Found
+          </ng-container>
+
+          <ng-container *ngIf="filterContractRemarks.length > 0" >
+            
+            <mat-accordion multi>
+      
+              <ng-container *ngFor="let i of filterContractRemarks">
+        
+                <mat-expansion-panel >
+                  <mat-expansion-panel-header>
+          
+                    <mat-panel-title>
+                      {{i.remarks_header}}
+                    </mat-panel-title>
+          
+                    <!-- <mat-panel-description>
+                      Remarks Desc
+                    </mat-panel-description> -->
+          
+                  </mat-expansion-panel-header>
+                  <p> {{i.remarks}}</p>
+                  <mat-divider></mat-divider>
+                  <br>
+                  <div style="text-align: right;">
+                    <button mat-mini-fab  color="primary" aria-label="" matTooltip="Edit Remark" (click)="updateRemark(i.remarks_id,i.remarks_header,i.remarks,currentContractID,currentContractSn)">
+                      <mat-icon>edit_note</mat-icon>
+                    </button>
+                    &nbsp;
+                    <button mat-mini-fab  color="warn" aria-label="" matTooltip="Delete Remark" (click)="deleteRemark('Remark',i.remarks_id,currentContractID,currentContractSn)">
+                      <mat-icon>delete</mat-icon>
+                    </button>
+                  </div>
+                </mat-expansion-panel>
+        
+              </ng-container>
+              
+        
+            </mat-accordion>
+          </ng-container>
+      
+          
+          </mat-card>
+      
+      
+        </div>
+      </div>
 
 
-  </div>
-</div>
+      <div style="text-align: right;font-weight: bold; width:75%; color:maroon">
+        <label for="">{{rowsFound}} Records Found</label>
+      </div>
+
+
+    </mat-tab>
+    
+    <mat-tab label="ADD" class="tab-grp">  
+      <h1>Add New Contract</h1>
+      <mat-divider></mat-divider>
+      <br>
+      <div class="form-container">
+
+        <form (ngSubmit)="addNewContract(AddContractform)" #AddContractform="ngForm">
+          
+          <div class="form-grid">
+            <mat-form-field >
+              <mat-label>Project ID</mat-label>
+              <input matInput name="project_id" ngModel>
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Project Name</mat-label>
+              <input matInput name="project_name" ngModel>
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>First Party</mat-label>
+              <input matInput name="first_party" ngModel>
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Second Party</mat-label>
+              <input matInput name="second_party" ngModel>
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Project Location</mat-label>
+              <input matInput name="project_location" ngModel>
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Template</mat-label>
+              <input matInput name="template" ngModel>
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Type</mat-label>
+              <input matInput name="type" ngModel>
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Scope</mat-label>
+              <input matInput name="scope" ngModel>
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>ARN</mat-label>
+              <input matInput name="arn" ngModel>
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Agreement</mat-label>
+              <input matInput name="agreement" ngModel>
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Contact</mat-label>
+              <input matInput name="contact" ngModel>
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Contact EXT.</mat-label>
+              <input matInput name="contact_ext" ngModel>
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Director</mat-label>
+              <input matInput name="director" ngModel>
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="primary">Add to Database</button>
+        </form>
+
+      </div>
+      
+    </mat-tab>
+
+    <mat-tab label="EDIT" class="tab-grp" > 
+     <ng-container *ngIf="currentContractEdit == null">
+      <h1>Select Contract to Edit from Homepage</h1>
+     </ng-container>
+
+     <ng-container  *ngIf="currentContractEdit !== null">
+
+      <h1>Edit Contract ID: {{edit_project_id}}</h1>
+      <mat-divider></mat-divider>
+      <br>
+      <div class="form-container">
+
+        <form (ngSubmit)="editContract(editContractForm,edit_project_id,currentContractEdit)" #editContractForm="ngForm">
+          
+          <div class="form-grid">
+            <mat-form-field >
+              <mat-label>Project ID</mat-label>
+              <input matInput ngModel name="project_id" [(ngModel)]="edit_project_id">
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Project Name</mat-label>
+              <input matInput ngModel name="project_name" [(ngModel)]="edit_project_name">
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>First Party</mat-label>
+              <input matInput ngModel name="first_party" [(ngModel)]="edit_first_party">
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Second Party</mat-label>
+              <input matInput ngModel name="second_party" [(ngModel)]="edit_second_party">
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Project Location</mat-label>
+              <input matInput ngModel name="project_location" [(ngModel)]="edit_project_location">
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Template</mat-label>
+              <input matInput ngModel name="template" [(ngModel)]="edit_template">
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Type</mat-label>
+              <input matInput ngModel name="type" [(ngModel)]="edit_type">
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Scope</mat-label>
+              <input matInput ngModel name="scope" [(ngModel)]="edit_scope">
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>ARN</mat-label>
+              <input matInput ngModel name="arn" [(ngModel)]="edit_arn">
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Agreement</mat-label>
+              <input matInput ngModel name="agreement" [(ngModel)]="edit_agreement">
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Contact</mat-label>
+              <input matInput ngModel name="contact" [(ngModel)]="edit_contact">
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Contact EXT.</mat-label>
+              <input matInput ngModel name="contact_ext" [(ngModel)]="edit_contact_ext">
+            </mat-form-field>
+  
+            <mat-form-field >
+              <mat-label>Director</mat-label>
+              <input matInput ngModel name="director" [(ngModel)]="edit_director">
+            </mat-form-field>
+          </div>
+          <button mat-raised-button color="primary">Update Contract</button>
+        </form>
+
+      </div>
+
+     </ng-container>
+      
+    </mat-tab>
+
+  </mat-tab-group>
 
 </div>

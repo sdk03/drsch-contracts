@@ -44,6 +44,26 @@ app.post('/dc-data',dcController.getAllData);
 // GET ALL CONTRACT REMARKS FROM DB
 app.post('/dc-remarks',dcController.getAllRemarks);
 
+//ADD NEW CONTRACT
+app.post('/dc-addContract/:pass',dcController.addNewContract);
+
+//ADD NEW REMARK
+app.post('/dc-addRemark',dcController.addNewRemark);
+
+
+//DELETE CONTRACT
+app.post('/dc-delContract',dcController.deleteContract);
+
+//DELETE REMARK
+app.post('/dc-delRemark',dcController.deleteRemark);
+
+//UPDATE CONTRACT
+app.post('/dc-updContract',dcController.updateContract);
+
+//UPDATE REMARK
+app.post('/dc-updRemark',dcController.updateRemark);
+
+
 // SERVER -------------------------------
 
 const PORT = process.env.PORT || 8080;

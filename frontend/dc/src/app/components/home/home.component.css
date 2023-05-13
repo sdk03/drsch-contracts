@@ -4,28 +4,90 @@
 
 .table-grid{
     display: grid;
-    grid-template-columns: 75% 23%;
+    grid-template-columns: 76% 22%;
     column-gap: 2em;
    
 }
 
 .table-container{
-    height: 88vh;
+    height: 78vh;
     overflow: auto;
 
 }
 
 .data-table{
-    width: 100%;
+    width: 125%;
 }
+
+#data-table tr:nth-child(even){background-color: #f2f2f2;}
+#data-table th {
+    background-color: #3F51B5;
+    color: white;
+  }
+
 
 .main{
     padding: .5em;
-    margin-right: .5em;
+    /* margin-right: .5em;
     margin-left: .5em;
-    margin-top: .5em;
+    margin-top: .5em; */
 
-    border: 1px solid red;
-    border-radius: 16px;
-    background-color: #D5D5D3;
+    /* border: 1px solid red;
+    border-radius: 16px; */
+    background-color: #e3e3e3;
+    height:97vh;
+}
+
+.tab-grp{
+    padding:.5em;
+}
+
+
+
+.form-grid{
+    display:grid;
+    grid-template-columns: repeat(4,auto);
+    gap: 2em;
+}
+
+.card-rt{
+    height: 90%;
+    padding: .5em;
+    width: 99.6%;
+}
+
+.logo{
+    
+}
+.heading{
+    /* color: wheat; */
+    /* font-size: 2em; */
+    margin-top: 2%;
+    text-align: center;
+}
+
+.form-container{
+    height: 85vh;
+}
+
+/* TD COLORS */
+
+.approved{
+    background-color: #C6D9C6;
+}
+
+.com{
+    background-color: #9FBDDB;
+}
+
+.tech-dept{
+    background-color: #EF9998;
+}
+
+.no-work{
+    background-color: #EDBF91;
+}
+
+.grid2{
+
 }

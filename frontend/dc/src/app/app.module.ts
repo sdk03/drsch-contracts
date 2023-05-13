@@ -16,6 +16,19 @@ import {MatInputModule} from '@angular/material/input';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatCardModule} from '@angular/material/card';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDialogModule} from '@angular/material/dialog';
+import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
+import { AddRemarkDialogComponent } from './components/add-remark-dialog/add-remark-dialog.component';
+import { FormsModule } from '@angular/forms';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { UpdateContractDialogComponent } from './components/update-contract-dialog/update-contract-dialog.component';
+import { DeleteRemarkDialogComponent } from './components/delete-remark-dialog/delete-remark-dialog.component';
+
+
 
 
 
@@ -24,7 +37,11 @@ import {MatCardModule} from '@angular/material/card';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    DeleteDialogComponent,
+    AddRemarkDialogComponent,
+    UpdateContractDialogComponent,
+    DeleteRemarkDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +54,14 @@ import {MatCardModule} from '@angular/material/card';
     MatExpansionModule,
     MatDividerModule,
     MatCardModule,
-    HttpClientModule
+    MatTabsModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatDialogModule,
+    HttpClientModule,
+    MatSnackBarModule,
+    FormsModule
     
   ],
   providers: [],

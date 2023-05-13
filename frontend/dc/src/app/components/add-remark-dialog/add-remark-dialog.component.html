@@ -1,0 +1,21 @@
+<div class="main">
+    <h2>Add New Remark for Contract: {{data.project_id}}</h2>
+    <mat-divider></mat-divider>
+    <br>
+    <form (ngSubmit)="addNewRemarkConfirmed(data.db_id,data.project_id,newRemarks)" #newRemarks="ngForm">
+
+        <mat-form-field style="width: 100%;" >
+            <mat-label>Remarks Heading</mat-label>
+            <input type="text" matInput name="remarks_header" ngModel>
+        </mat-form-field>
+
+        <mat-form-field style="width: 100%;">
+            <mat-label>Remarks Data</mat-label>
+            <textarea matInput name="remarks" rows="10" ngModel></textarea>
+        </mat-form-field>
+
+        <div style="text-align: right;">
+            <button mat-raised-button color="primary">Add Remarks</button>
+        </div>
+    </form>
+</div>
